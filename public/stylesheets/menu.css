@@ -1,0 +1,520 @@
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+/* Content wrapper */
+
+.wrapper {
+  width: 100%;
+
+  margin: 0 auto;
+}
+
+.wrapper-small { max-width: 728px; }
+
+.wrapper-flush { width: 100%; }
+
+/**
+ * Navigation
+ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+
+}
+
+/** 
+* Nav container 
+* 1. Ensure this slides in below parent
+* 2. Hide by default
+* 3. Smoother scrolling experience on iOS
+*/
+
+.nav-container {
+  position: fixed;
+  top: 60px; /* 1 */
+  left: 0;
+  z-index: 9999;
+  overflow-y: auto;
+  visibility: hidden; /* 2 */
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+  -webkit-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%); /* 2 */
+  background-color: #403533;
+  -webkit-overflow-scrolling: touch; /* 3 */
+}
+
+/* 1. Show when `.is-visible` class is added */
+
+.nav-container.is-visible {
+  visibility: visible; /* 1 */
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0); /* 1 */
+}
+
+/* Nav toggle */
+
+.nav-toggle {
+  line-height: 1;
+  display: inline-block;
+  padding: 17px 10px;
+  border: 0; float:left; background:#f1f1f1;
+}
+
+/* Nav toggle icon */
+
+.nav-toggle .icon-menu {
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 20px;
+  vertical-align: middle;
+  fill: none;
+}
+
+/* Nav toggle icon lines */
+
+.icon-menu .line {
+  position: absolute;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 4px;
+  -webkit-transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  -webkit-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  background-color: #fff;
+}
+
+/* Nav toggle icon line 1 */
+
+.icon-menu .line-1 { top: 0; }
+
+/* When active, rotate line 1 to be lefthand part of X */
+
+.is-active .icon-menu .line-1 {
+  -webkit-transform: translateY(8px) translateX(0) rotate(45deg);
+  -ms-transform: translateY(8px) translateX(0) rotate(45deg);
+  transform: translateY(8px) translateX(0) rotate(45deg);
+}
+
+/* Nav toggle icon line 2 */
+
+.icon-menu .line-2 {
+  top: 50%;
+  margin-top: -2px;
+}
+
+/* When active, hide line 2 */
+
+.is-active .icon-menu .line-2 { opacity: 0; }
+
+/* Nav toggle icon line 3 */
+
+.icon-menu .line-3 { bottom: 0; }
+
+/* When active, rotate line 3 to be righthand part of X */
+
+.is-active .icon-menu .line-3 {
+  -webkit-transform: translateY(-8px) translateX(0) rotate(-45deg);
+  -ms-transform: translateY(-8px) translateX(0) rotate(-45deg);
+  transform: translateY(-8px) translateX(0) rotate(-45deg);
+}
+
+/* Remove default list styles for menus */
+
+.menu {
+  list-style: none;
+  padding: 0; max-width:1140px; margin:0px auto;
+}
+
+/** 
+* 1. Give menu a lighter background than its container 
+* 2. Prevent menu text from being accidentally highlighted
+*/
+
+.nav-menu {
+  background-color: #403533; /* 1 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;         /* 2 */
+}
+
+/* Give menu items a top border */
+
+.nav-menu .menu-item { border-top: 1px solid #bbb; }
+
+/* Give last menu item a bottom border */
+
+.nav-menu > .menu-item:last-child { border-bottom: 1px solid #bbb; }
+
+/* Darker background color on hover, and when toggled */
+
+.nav-menu > .menu-item:hover,
+.nav-menu > .menu-item.is-active { background-color: #90B07F; }
+
+/* 1. Menu links are block level, by default */
+
+.nav-menu .menu-link {
+  display: block; /* 1 */
+  text-decoration: none;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border-right:1px solid #5E4C4A;
+  text-transform:uppercase;
+  border-left:none;
+}
+.active{background-color: #90B07F;}
+/* 1. Menu items with dropdowns appear clickable */
+
+.has-dropdown {
+  position: relative;
+  cursor: pointer; /* 1 */
+}
+
+/* 1. Parent menu links inlined so you can toggle the dropdown */
+
+.has-dropdown > .menu-link { display: inline-block; }
+
+/* 1. Add an icon to menu items that have sub menus */
+
+.has-dropdown:after {
+  font-size: 32px;
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  bottom: 0;
+  content: "+"; /* 1 */
+  color: #fff;
+}
+
+/* 1. Switch icon to n-dash when toggled */
+
+.has-dropdown.is-active:after { content: "\2013"; /* 1 */ }
+
+/**
+ * Dropdowns
+ * 1. Hide dropdowns by default
+ */
+
+.nav-dropdown {
+  display: none; /* 1 */
+  background-color: #0c5587;
+}
+
+/* 1. Show dropdown when toggled */
+
+.has-dropdown.is-active > .nav-dropdown { display: block; /* 1 */ }
+
+/* 2nd level dropdown */
+
+.nav-dropdown .nav-dropdown { background-color: #aaa; }
+
+.nav-dropdown .menu-item { border-color: #a0a0a0; }
+
+.nav-dropdown .nav-dropdown .menu-item {
+  background-color: #b0b0b0;
+  border-color: #909090;
+}
+
+/* Main content area */
+
+.content { margin-top: 60px; }
+
+.content .wrapper { padding: 1rem 0; }
+ @media (min-width: 960px) {
+
+.nav { background-color: #dedede; }
+
+.nav,
+ .nav-container,
+ .nav-container.is-visible {
+  position: static;
+  top: auto;
+  left: auto;
+  z-index: auto;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.nav-container,
+ .nav-container.is-visible {
+  visibility: visible;
+  height: auto;
+  min-height: 0;
+  overflow-y: visible;
+}
+
+.nav-toggle { display: none; }
+
+/* 1. Display menu items inline */
+
+.nav-menu > .menu-item,
+ .nav-menu > .menu-item.is-active {
+  display: inline-block; /* 1 */
+  background-color: transparent;
+  border: 0;
+}
+
+/* Remove bottom border on last child */
+
+.nav-menu > .menu-item:last-child { border: 0; }
+
+.nav-menu .menu-item {
+  -webkit-transition: background-color 0.15s ease-in-out,  color 0.15s ease-in-out;
+  transition: background-color 0.15s ease-in-out,  color 0.15s ease-in-out;
+}
+
+/* Remove +/- icons */
+
+.has-dropdown:after { content: "" !important; }
+
+/* Add a caret to top-level menu items that have dropdowns */
+
+.nav-menu > .has-dropdown:after {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  width: 0;
+  height: 0;
+  margin-top: -2px;
+  margin-left: -4px;
+  content: "";
+  border-width: 5px 5px 0 5px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Increase padding to compensate for caret */
+
+.has-dropdown > .menu-link { padding-right: 2rem; }
+
+/* Re-style dropdowns for larger screens */
+
+.nav-dropdown {
+  display: block;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  width: 200px;
+  margin: 0;
+  padding: 0.5rem 0;
+  background-color: #333333;
+  box-shadow: 0 0 4px hsla(0, 0%, 0%, 0.15);
+  visibility: hidden;
+  -webkit-transition: visibility 0s linear 0.25s,  opacity 0.25s linear;
+  transition: visibility 0s linear 0.25s,  opacity 0.25s linear;
+}
+
+.has-dropdown:hover > .nav-dropdown {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+.nav-dropdown .menu-item { border: 0; }
+
+.nav-dropdown .menu-item:hover,
+ .nav-dropdown .nav-dropdown .menu-item:hover { background-color: #202020; }
+
+.nav-dropdown .nav-dropdown,
+ .nav-dropdown .nav-dropdown .menu-item { background-color: #333333; }
+
+.nav-dropdown .nav-dropdown {
+  z-index: 9998;
+  top: 0;
+  left: 100%;
+}
+
+/*Footer section starts here*/
+
+
+
+
+
+kbd {
+	padding:2px 4px;
+	font-size:90%;
+	color:#fff;
+	background-color:#333;
+	border-radius:3px;
+	-webkit-box-shadow:inset 0 -1px 0 rgba(0, 0, 0, .25);
+	box-shadow:inset 0 -1px 0 rgba(0, 0, 0, .25)
+}
+
+.container {
+	padding-right:15px;
+	padding-left:15px;
+	margin-right:auto;
+	margin-left:auto
+}
+
+.btn-group, .btn-group-vertical {
+	position:relative;
+	display:inline-block;
+	vertical-align:middle
+}
+.btn-group-vertical>.btn, .btn-group>.btn {
+	position:relative;
+	float:left
+}
+.btn-group-vertical>.btn.active, .btn-group-vertical>.btn:active, .btn-group-vertical>.btn:focus, .btn-group-vertical>.btn:hover, .btn-group>.btn.active, .btn-group>.btn:active, .btn-group>.btn:focus, .btn-group>.btn:hover {
+	z-index:2
+}
+.btn-group .btn+.btn, .btn-group .btn+.btn-group, .btn-group .btn-group+.btn, .btn-group .btn-group+.btn-group {
+	margin-left:-1px
+}
+.btn-toolbar {
+	margin-left:-5px
+}
+.btn-toolbar .btn-group, .btn-toolbar .input-group {
+	float:left
+}
+.btn-toolbar>.btn, .btn-toolbar>.btn-group, .btn-toolbar>.input-group {
+	margin-left:5px
+}
+.btn-group>.btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+border-radius:0
+}
+.btn-group>.btn:first-child {
+	margin-left:0
+}
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+border-top-right-radius:0;
+border-bottom-right-radius:0
+}
+.btn-group>.btn:last-child:not(:first-child), .btn-group>.dropdown-toggle:not(:first-child) {
+border-top-left-radius:0;
+border-bottom-left-radius:0
+}
+.btn-group>.btn-group {
+	float:left
+}
+.btn-group>.btn-group:not(:first-child):not(:last-child)>.btn {
+border-radius:0
+}
+.btn-group>.btn-group:first-child:not(:last-child)>.btn:last-child, .btn-group>.btn-group:first-child:not(:last-child)>.dropdown-toggle {
+border-top-right-radius:0;
+border-bottom-right-radius:0
+}
+.btn-group>.btn-group:last-child:not(:first-child)>.btn:first-child {
+border-top-left-radius:0;
+border-bottom-left-radius:0
+}
+.btn-group .dropdown-toggle:active, .btn-group.open .dropdown-toggle {
+	outline:0
+}
+
+.list-group-item-text {
+	margin-bottom:0;
+	line-height:1.3
+}
+.panel {
+	margin-bottom:20px;
+	background-color:#f7f5ee;
+	
+	
+}
+.panel-body {
+	padding:15px
+}
+.panel-heading {
+	padding:10px 15px;
+	border-bottom:1px solid transparent;
+	border-top-left-radius:3px;
+	border-top-right-radius:3px
+}
+.panel-heading>.dropdown .dropdown-toggle {
+	color:inherit
+}
+.panel-title {
+	margin-top:0;
+	margin-bottom:0;
+	font-size:16px;
+	color:inherit
+}
+.panel-title>.small, .panel-title>.small>a, .panel-title>a, .panel-title>small, .panel-title>small>a {
+	color:inherit
+}
+.panel-footer {
+	padding:10px 15px;
+	background-color:#f5f5f5;
+	border-top:1px solid #ddd;
+	border-bottom-right-radius:3px;
+	border-bottom-left-radius:3px
+}
+.panel>.list-group, .panel>.panel-collapse>.list-group {
+	margin-bottom:0
+}
+.panel>.list-group .list-group-item, .panel>.panel-collapse>.list-group .list-group-item {
+	border-width:1px 0;
+	border-radius:0
+}
+.panel>.list-group:first-child .list-group-item:first-child, .panel>.panel-collapse>.list-group:first-child .list-group-item:first-child {
+	border-top:0;
+	border-top-left-radius:3px;
+	border-top-right-radius:3px
+}
+.panel>.list-group:last-child .list-group-item:last-child, .panel>.panel-collapse>.list-group:last-child .list-group-item:last-child {
+	border-bottom:0;
+	border-bottom-right-radius:3px;
+	border-bottom-left-radius:3px
+}
+.panel-heading+.list-group .list-group-item:first-child {
+	border-top-width:0
+}
+.list-group+.panel-footer {
+	border-top-width:0
+}
+.panel>.panel-collapse>.table, .panel>.table, .panel>.table-responsive>.table {
+	margin-bottom:0
+}
+.panel>.panel-collapse>.table caption, .panel>.table caption, .panel>.table-responsive>.table caption {
+	padding-right:15px;
+	padding-left:15px
+}
+.panel>.table-responsive:first-child>.table:first-child, .panel>.table:first-child {
+	border-top-left-radius:3px;
+	border-top-right-radius:3px
+}
+.panel>.table-responsive:first-child>.table:first-child>tbody:first-child>tr:first-child, .panel>.table-responsive:first-child>.table:first-child>thead:first-child>tr:first-child, .panel>.table:first-child>tbody:first-child>tr:first-child, .panel>.table:first-child>thead:first-child>tr:first-child {
+	border-top-left-radius:3px;
+	border-top-right-radius:3px
+}
+
+
+.panel-group .panel-footer+.panel-collapse .panel-body {
+	border-bottom:1px solid #ddd
+}
+.panel-default {
+	border-color:#ddd
+}
+.panel-default>.panel-heading {
+	color:#333;
+	background-color:#f7f5ee;
+	
+}
+
+
+
+
+/*Footer section end here*/

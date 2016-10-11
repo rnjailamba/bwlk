@@ -18,7 +18,7 @@ modules.winston.log('debug', 'Hello again distributed log files!');
 router.get('/', function(req, res){
 
     // res.render('index/home', { title: 'Express' });
-    res.sendFile('home.html', {
+    res.sendFile('index.html', {
       root: 'views/index'
     });
 });
